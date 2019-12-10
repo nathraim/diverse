@@ -1,4 +1,4 @@
-bqplot==0.12.0
+bqplot==0.11.2
 appmode
 playsound
 matplotlib
