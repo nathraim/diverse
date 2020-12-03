@@ -1,3 +1,4 @@
 bqplot
-appmode==0.8.0
+appmode
 matplotlib
+playsound
