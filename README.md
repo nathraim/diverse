@@ -14,3 +14,4 @@ Mathematical windmill (see https://www.youtube.com/watch?v=M64HUIJFTZM):
 
 ![](bean_machine/galton_board.gif)
 ![](windmill/mathematical_windmill.gif)
+![](springs/spring.gif)
