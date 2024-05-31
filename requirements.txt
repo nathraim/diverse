@@ -1,4 +1,3 @@
 bqplot
 matplotlib
 playsound
-appmode
