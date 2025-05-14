@@ -20,6 +20,10 @@ Optimal angle:
 Math vs iteration: 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nathraim/diverse/master?urlpath=%2Fnotebooks%2Fnotebooks%2Fmath_vs_iter.ipynb)
 
+Logistic map:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nathraim/diverse/master?urlpath=%2Fnotebooks%2Fnotebooks%2Fsuite_logistique.ipynb)
+
 ![](bean_machine/galton_board.gif)
 ![](windmill/mathematical_windmill.gif)
 ![](springs/spring.gif)
+<img src="logistic_map/logistic_gif.gif" width="40%" height="40%"/>
