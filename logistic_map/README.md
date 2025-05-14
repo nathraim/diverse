@@ -1,3 +1,3 @@
 La fameuse suite logistique :
 
-![](logistic_gif.gif)
+<img src="logistic_gif.gif" width="40%" height="40%"/>
