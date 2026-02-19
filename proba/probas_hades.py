@@ -54,6 +54,12 @@ def esperance_maths(n_max:int,nb_c:int,p:float) -> float:
         esp += k*proba_maths(k,n_max,nb_c,p)
     return esp
 
+def repartition(k:int,n_max:int,nb_c:int,p:float) -> float:
+    repart = 0
+    for j in range(1,k+1):
+        repart += proba_maths(j,n_max,nb_c,p)
+    return repart
+
 def checkprob(lst_prob) -> None:
     tolerance = 1e-6
     # lst_prob = [proba_maths(i,n_max,nb_c,p) for i in range(1,n_max+2)]
@@ -169,9 +175,10 @@ lst_k = [i for i in range(1,n_max+2)]
 lst_prob = [proba_maths(k,n_max,nb_c,p) for k in range(1,n_max+2)]
 checkprob(lst_prob)
 lst_esp = [esperance_maths(n,nb_c,p) for n in range(1,n_max+1)]
+lst_repart = [repartition(k,n_max,nb_c,p) for k in range(1,n_max+1)] #On ne prend pas en compte P(X=n+1)
 
 # Créer les subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+fig, ((ax1, ax2),(ax3,ax4)) = plt.subplots(2, 2, figsize=(12, 8))
 # plt.subplots_adjust(bottom=0.2)  # Laisse de la place pour le curseur
 
 # lst_prob = np.power(lst_prob, 0.1)  # 0.3 < 1 pour étirer les petites valeurs
@@ -191,7 +198,7 @@ ax1.set_ylabel('Probabilité')
 line2, = ax2.plot(lst_k[:-1], lst_esp, marker='o', markersize=6, markerfacecolor='orange', 
          markeredgecolor='black', ls='')
 ax2.set_title('Espérance selon le nombre de zones parcourues')
-ax2.set_xticks(range(min(lst_k), max(lst_k)+1, 2))  # Ticks tous les 2 entiers
+ax2.set_xticks(range(min(lst_k[:-1]), max(lst_k[:-1])+1, 2))  # Ticks tous les 2 entiers
 ax2.set_yticks(range(int(min(lst_esp)), int(max(lst_esp))+1, 2))  # Ticks tous les 2 entiers
 ax2.yaxis.set_major_formatter(StrMethodFormatter('{x:.0f}'))  # 2 chiffres après la virgule
 ax2.set_ylim(0, max(lst_esp)*1.1)
@@ -199,6 +206,19 @@ ax2.set_xlabel('Nombre de zones')
 ax2.set_ylabel('Espérance')
 # ax1.legend()
 # ax2.legend()
+
+# 3è graphe
+line3, = ax3.plot(lst_k[:-1], lst_repart, marker='o', markersize=6, markerfacecolor='orange', 
+         markeredgecolor='black', ls='', label='proba math')
+ax3.set_title('Probabilité d\'activation avant une zone donnée (n fixé)')
+ax3.set_xticks(range(min(lst_k[:-1]), max(lst_k[:-1])+1, 2))  # Ticks tous les 2 entiers
+ax3.set_yticks(np.linspace(min(lst_repart), max(lst_repart), 10))
+ax3.yaxis.set_major_formatter(StrMethodFormatter('{x:.2f}'))  # 2 chiffres après la virgule
+ax3.set_ylim(-0.005, max(lst_repart)*1.1)
+ax3.set_xlabel('Numéro de la zone')
+ax3.set_ylabel('Fonction de répartition')
+
+
 # Ajouter un texte dynamique
 text_p = ax1.text(0.8, 0.95, '', transform=ax1.transAxes, fontsize=10,
                 verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
@@ -212,9 +232,10 @@ def init():
     # ax1.set_ylim(-0.005, 1)
     # ax1.set_yscale('log')
     line2.set_ydata(lst_esp)
+    line3.set_ydata(lst_repart)
     text_p.set_text(f'p = {p:.2f}')
     text_nbc.set_text(f'{nb_c} cartes')
-    return line1, line2, text_p, text_nbc
+    return line1, line2, line3, text_p, text_nbc
 
 # Fonction d'animation
 def update(p): # Met à jour les données pour chaque sous-graphe
@@ -224,7 +245,7 @@ def update(p): # Met à jour les données pour chaque sous-graphe
         line1.set_ydata(lst_prob)
         ax1.set_ylim(min(-0.002,min(lst_prob)*0.9), max(lst_prob)*1.1)
         ax1.set_yticks(np.linspace(min(lst_prob), max(lst_prob), 10))
-        ax1.set_title('Probabilité d\'activation de la carte "Mort" (n fixé)')
+        # ax1.set_title('Probabilité d\'activation de la carte "Mort" (n fixé)')
         
         lst_esp = [esperance_maths(n,nb_c,p) for n in range(1,n_max+1)]
         line2.set_ydata(lst_esp)
@@ -232,11 +253,18 @@ def update(p): # Met à jour les données pour chaque sous-graphe
         # ax2.set_yticks(range(int(min(lst_esp)), int(max(lst_esp))+1, 2))  # Ticks tous les 2 entiers
         # ax2.set_yticks(np.linspace(int(min(lst_esp)),int(max(lst_esp)),10))  # Ticks tous les 2 entiers
         
+        lst_repart = [repartition(k,n_max,nb_c,p) for k in range(1,n_max+1)]
+        line3.set_ydata(lst_repart)
+        # ax3.set_ylim(-0.005, max(lst_repart)*1.1)
+        ax3.set_ylim(0,1.1)
+        # ax3.set_yticks(np.linspace(min(lst_repart), max(lst_repart), 10))
+        ax3.set_yticks(np.linspace(0, 1, 11))
+        
         text_p.set_text(f'p = {p:.3f}')  # Met à jour le texte
         # fig.canvas.draw_idle()
     else:
         pass
-    return line1, line2, text_p
+    return line1, line2, line3, text_p
 
 # Créer l'animation
 lst_frames = np.linspace(0, 1, 101)
@@ -258,7 +286,7 @@ plt.tight_layout()
 plt.show()
 
 # ani.save('animation.mp4', writer='ffmpeg')  # Nécessite ffmpeg
-ani.save(filename="proba.gif", writer="pillow",fps=10,dpi=200)
+ani.save(filename="proba_hades.gif", writer="pillow",fps=10,dpi=100)
 
 
 
