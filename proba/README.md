@@ -16,11 +16,12 @@ Si la carte n'est pas obtenue au bout des $n$ zones, on a alors
 
 $$P(X=n+1) = \frac{p}{\text{c}} \sum_{j=0}^{\min(c-1, n)} \binom{n}{j} p^j (1-p)^{n-j} (c-j)$$
 
+On peut remarquer que tant que le nombre de zones franchies est inférieur au nombre de cartes, la loi est uniforme. En effet, si $k\leq c$, alors l'expression de $P$ devient 
+$P(X=k) = \frac{p}{\text{c}} \sum_{j=0}^{k-1} \binom{k-1}{j} p^j (1-p)^{k-1-j}$, qui devient simplement, en reconnaissant un binôme de newton, $P(X=k)=\frac{p}{\text{c}}(p+(1-p))^{k-1}=\frac{p}{\text{c}}$.
+
 L'espérance, pour $n$ fixé, est 
 
 $$E(X)=\sum_{k=1}^{n+1}kP(X=k)$$
-
-On constate que tant que le nombre de zones franchies est inférieur au nombre de cartes, la loi est uniforme.
 
 <img src="proba_hades.gif" width="80%" height="80%"/>
 
