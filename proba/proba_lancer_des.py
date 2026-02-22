@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.ticker import StrMethodFormatter
 from matplotlib.animation import FuncAnimation
-from matplotlib.widgets import Slider, Button
+# from matplotlib.widgets import Slider, Button
 import sys
 import random
 

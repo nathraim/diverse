@@ -22,5 +22,8 @@ $$E(X)=\sum_{k=1}^{n+1}kP(X=k)$$
 
 On constate que tant que le nombre de zones franchies est inférieur au nombre de cartes, la loi est uniforme.
 
-
 <img src="proba_hades.gif" width="80%" height="80%"/>
+
+Les résultats précédents sont issus de calculs purement mathématiques. En faisant une simulation purement numérique, où on répète 1 million de fois l'expérience, on retrouve bien statistiquement nos résultats théoriques :
+
+<img src="proba_hades_simu.png" width="80%" height="80%"/>
