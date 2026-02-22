@@ -286,7 +286,7 @@ plt.tight_layout()
 plt.show()
 
 # ani.save('animation.mp4', writer='ffmpeg')  # Nécessite ffmpeg
-ani.save(filename="proba_hades.gif", writer="pillow",fps=10,dpi=100)
+# ani.save(filename="proba_hades.gif", writer="pillow",fps=10,dpi=100)
 
 
 
