@@ -21,8 +21,8 @@ facecolor="black"
 
 # Define dimensions and set up initial drawing
 
-nb_balls = 200 # We should put at least as many balls as number of rows
-nb_rows = 5
+nb_balls = 1000 # We should put at least as many balls as number of rows
+nb_rows = 15
 
 count_balls = np.zeros(nb_rows,dtype=int)
 
@@ -173,19 +173,19 @@ def animate_curve(i):
 dr = 0.1 # "time step". 0.1 should be enough for a smooth animation even at low speed.
 n_frames = int((nb_balls + nb_rows-1)/dr+1)-1 # It seems that when the init function is used, it uses 1 more frame...
 #ani_curve = animation.FuncAnimation(fig, animate_curve, init_func=init, frames=1000, blit=True, interval=10, repeat=False)
-ani_curve = animation.FuncAnimation(fig, animate_curve, frames=n_frames, blit=False, interval=20, repeat=False)
+ani_curve = animation.FuncAnimation(fig, animate_curve, frames=n_frames, blit=False, interval=2, repeat=False)
 
 # Show animation
 plt.show()
 
 # Define movie settings if you want to save it to file
-FFMpegWriter = animation.writers['ffmpeg']
-metadata = dict(title='galton_board_my_version', artist='leinahtan',
-                comment='Planche de Galton en langage Python')
+# FFMpegWriter = animation.writers['ffmpeg']
+# metadata = dict(title='galton_board_my_version', artist='leinahtan',
+                # comment='Planche de Galton en langage Python')
 
 # Change the video bitrate as you like and add some metadata.
-mywriter = FFMpegWriter(fps=50, bitrate=500, metadata=metadata) #If the animation is slow, one can afford lowering the bitrate and get a less heavy file for a comparable quality
-my_dpi=300
+# mywriter = FFMpegWriter(fps=50, bitrate=500, metadata=metadata) #If the animation is slow, one can afford lowering the bitrate and get a less heavy file for a comparable quality
+# my_dpi=300
 
 # Save animation
 #ani_curve.save("galton_board.mp4",writer=mywriter,dpi=my_dpi)
